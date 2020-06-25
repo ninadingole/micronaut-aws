@@ -1,0 +1,5 @@
+profile: function-aws
+defaultPackage: micronaut.aws
+---
+testFramework: spock
+sourceLanguage: kotlin
