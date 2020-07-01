@@ -55,6 +55,10 @@ package:
 functions:
   micronaut-aws:
     handler: io.micronaut.function.aws.MicronautRequestStreamHandler
+    events:
+      - http:
+          path: users/hello
+          method: post
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

@@ -1,0 +1,32 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id "org.jetbrains.kotlin.kapt"
+    id "org.jetbrains.kotlin.plugin.allopen"
+}
+
+group 'micronaut.aws'
+version '0.1'
+
+
+configurations {
+    apifi {}
+}
+
+dependencies {
+    kapt(platform("io.micronaut:micronaut-bom:$micronautVersion"))
+    implementation(platform("io.micronaut:micronaut-bom:$micronautVersion"))
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation("io.micronaut:micronaut-http-server-netty")
+    implementation("io.micronaut:micronaut-http-server")
+    implementation("io.swagger.core.v3:swagger-annotations")
+    implementation("javax.annotation:javax.annotation-api")
+    kapt("io.micronaut.configuration:micronaut-openapi")
+    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    kaptTest(platform("io.micronaut:micronaut-bom:$micronautVersion"))
+
+    compile project(":core")
+
+}
+
+

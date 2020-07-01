@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Employees API
+  license:
+    name: MIT
+  description: API to store Employees Information
+paths:
+  /employees:
+    get:
+      summary: Employees
+      tags:
+        - employee
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeList'
+      operationId: get-employees
+      description: Get All Employees
+    post:
+      summary: Add new employee
+      tags: []
+      responses:
+        '201':
+          description: Created
+          headers:
+            location:
+              schema:
+                type: string
+      operationId: post-employees
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      description: Add New Employee
+    parameters: []
+  '/employees/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: employee id to delete
+    delete:
+      summary: Delete employee
+      tags:
+        - employee
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: delete-employees-id
+      description: ''
+components:
+  schemas:
+    Employee:
+      title: Employee
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        department:
+          type: string
+        mobile:
+          type: string
+        address:
+          type: string
+        location:
+          type: string
+        email_id:
+          type: string
+        skills:
+          type: array
+          items: {}
+    EmployeeList:
+      title: EmployeeList
+      type: object
+      properties:
+        employees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'

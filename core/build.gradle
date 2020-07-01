@@ -1,0 +1,29 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+group 'micronaut.aws'
+version '0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-core', version: '1.2.0'
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-log4j2', version: '1.1.0'
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-events', version: '2.2.7'
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.1'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.10.1'
+
+    implementation "io.micronaut:micronaut-function-aws"
+    implementation("io.micronaut.aws:micronaut-function-aws-api-proxy")
+    runtimeOnly "com.amazonaws:aws-lambda-java-log4j2:1.0.0"
+    runtimeOnly "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
+
+    testImplementation "io.micronaut:micronaut-function-client"
+    testRuntimeOnly "io.micronaut:micronaut-http-server-netty"
+    testRuntimeOnly "io.micronaut:micronaut-function-web"
+}

@@ -1,4 +1,4 @@
-package micronaut.aws
+package com.iamninad.mn.function
 
 import io.micronaut.runtime.Micronaut
 
