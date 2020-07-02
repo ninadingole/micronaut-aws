@@ -1,5 +1,7 @@
 profile: function-aws
-defaultPackage: micronaut.aws
+defaultPackage: com.iamninad
 ---
-testFramework: spock
+testFramework: kotlintest
+buildTool: gradle
 sourceLanguage: kotlin
+features: [logback]

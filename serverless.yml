@@ -50,15 +50,16 @@ provider:
 
 # you can add packaging information here
 package:
-  artifact: build/libs/micronaut-aws.jar
+  artifact: api/build/libs/micronaut-aws.jar
 
 functions:
   micronaut-aws:
-    handler: io.micronaut.function.aws.MicronautRequestStreamHandler
+    handler: com.iamninad.mn.StreamLambdaHandler
     events:
       - http:
-          path: users/hello
-          method: post
+          path: /{any+}
+          method: ANY
+
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

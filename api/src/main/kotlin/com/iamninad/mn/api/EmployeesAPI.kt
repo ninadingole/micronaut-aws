@@ -4,41 +4,36 @@ import com.iamninad.mn.model.Employee
 import com.iamninad.mn.service.EmployeesService
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.*
-import io.reactivex.Single
-import java.util.*
-import java.util.concurrent.ConcurrentHashMap
+import org.slf4j.LoggerFactory
 import java.util.stream.Stream
 import javax.inject.Inject
 
 @Controller("/employees")
 class EmployeesAPI {
 
-    internal val employees: ConcurrentHashMap<String, Employee> = ConcurrentHashMap()
+    private val LOG = LoggerFactory.getLogger(EmployeesAPI::class.java)
 
     @Inject
     lateinit var service: EmployeesService
 
-    @Get("/")
+    @Get
     fun list(): Stream<Employee> {
-        return employees.values.stream()
+        LOG.info("employee list")
+        return service.list()
     }
 
-    @Post("/")
-    fun add(@Body employee: Single<Employee>): Single<Employee> {
-        return employee.map {
-            it.id = UUID.randomUUID().toString()
-            employees[it.id!!] = it
-            it
-        }
+    @Post
+    fun add(@Body employee: Employee): Employee {
+        LOG.info("employee add")
+        return service.add(employee)
     }
 
     @Delete("/{id}")
     fun delete(id: String): HttpStatus {
-        return employees.remove(id).let {
-            when (it) {
-                is Employee -> HttpStatus.GONE
-                else -> HttpStatus.NOT_FOUND
-            }
+        LOG.info("employee delete")
+        return when (service.delete(id)) {
+            true -> HttpStatus.GONE
+            else -> HttpStatus.NOT_FOUND
         }
     }
 

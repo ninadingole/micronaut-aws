@@ -1,32 +1,46 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
+
 plugins {
-    id 'org.jetbrains.kotlin.jvm'
-    id "org.jetbrains.kotlin.kapt"
-    id "org.jetbrains.kotlin.plugin.allopen"
+    id "application"
 }
 
 group 'micronaut.aws'
 version '0.1'
 
 
-configurations {
-    apifi {}
+application {
+    mainClassName = "com.iamninad.mn.api.App"
+    applicationDefaultJvmArgs = [""]
 }
+
 
 dependencies {
-    kapt(platform("io.micronaut:micronaut-bom:$micronautVersion"))
-    implementation(platform("io.micronaut:micronaut-bom:$micronautVersion"))
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation("io.micronaut:micronaut-http-server-netty")
-    implementation("io.micronaut:micronaut-http-server")
-    implementation("io.swagger.core.v3:swagger-annotations")
-    implementation("javax.annotation:javax.annotation-api")
     kapt("io.micronaut.configuration:micronaut-openapi")
-    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
-    kaptTest(platform("io.micronaut:micronaut-bom:$micronautVersion"))
+    implementation("io.micronaut:micronaut-http-server-netty")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.swagger.core.v3:swagger-annotations")
+    implementation("io.micronaut.aws:micronaut-function-aws-api-proxy")
 
-    compile project(":core")
+    runtimeOnly("org.apache.logging.log4j:log4j-slf4j-impl:2.12.1")
+
+    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    compile project(path: ":core")
 
 }
 
 
+tasks.withType(ShadowJar) {
+    archiveBaseName.set("micronaut-aws")
+    archiveClassifier.set("")
+    archiveVersion.set("")
+    mergeServiceFiles()
+    transform(Log4j2PluginsCacheFileTransformer.class)
+}
+
+tasks.withType(Jar) {
+    manifest {
+        attributes["Main-Class"] = application.mainClassName
+    }
+}

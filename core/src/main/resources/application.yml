@@ -1,3 +1,3 @@
 micronaut:
   function:
-    name: aws-kotlin-jvm-gradle-dev-micronaut-aws
+    name: micronaut-aws
