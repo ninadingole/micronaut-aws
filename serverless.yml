@@ -50,7 +50,7 @@ provider:
 
 # you can add packaging information here
 package:
-  artifact: api/build/libs/micronaut-aws.jar
+  artifact: dist/micronaut-aws.jar
 
 functions:
   micronaut-aws:

@@ -13,3 +13,4 @@ out/
 .classpath
 .serverless
 bin
+dist

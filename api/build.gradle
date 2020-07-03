@@ -10,7 +10,7 @@ version '0.1'
 
 
 application {
-    mainClassName = "com.iamninad.mn.api.App"
+    mainClassName = "com.iamninad.mn.App"
     applicationDefaultJvmArgs = [""]
 }
 
@@ -34,6 +34,7 @@ dependencies {
 tasks.withType(ShadowJar) {
     archiveBaseName.set("micronaut-aws")
     archiveClassifier.set("")
+    destinationDirectory.set(new File("${rootDir}/dist"))
     archiveVersion.set("")
     mergeServiceFiles()
     transform(Log4j2PluginsCacheFileTransformer.class)
@@ -44,3 +45,4 @@ tasks.withType(Jar) {
         attributes["Main-Class"] = application.mainClassName
     }
 }
+

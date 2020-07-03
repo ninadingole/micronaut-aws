@@ -101,10 +101,13 @@ allprojects {
 
 }
 
+tasks.getByName("clean") {
+    delete "${rootDir}/dist"
+}
 
 test.classpath += configurations.developmentOnly
 
 configure(subprojects.findAll { it.name == 'api'}) {
 }
-build.finalizedBy(shadowJar)
+//build.finalizedBy(shadowJar)
 
