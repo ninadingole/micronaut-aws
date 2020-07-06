@@ -22,3 +22,13 @@ tracing:
       url: http://localhost:9411
     sampler:
       probability: 1
+endpoints:
+  all:
+    port: 8085
+  info:
+    sensitive: false
+  health:
+    details-visible: ANONYMOUS
+  routes:
+    enabled: true
+    sensitive: false
