@@ -38,6 +38,15 @@ allprojects {
         useJUnitPlatform()
     }
 
+    kapt {
+        arguments {
+            arg("micronaut.processing.incremental", true)
+            arg("micronaut.processing.annotations", "com.iamninad.*")
+            arg("micronaut.processing.group", "com.iamninad")
+            arg("micronaut.processing.module", "micronaut-aws")
+        }
+    }
+
 
     allOpen {
         annotation("io.micronaut.aop.Around")
@@ -72,6 +81,7 @@ allprojects {
         implementation("javax.annotation:javax.annotation-api")
         implementation("io.micronaut:micronaut-http-server-netty")
         implementation("io.micronaut:micronaut-http-client")
+        implementation("io.micronaut:micronaut-tracing")
         implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator")
         implementation("org.apache.logging.log4j:log4j-core:2.12.1")
         runtimeOnly("org.apache.logging.log4j:log4j-api:2.12.1")
@@ -83,16 +93,6 @@ allprojects {
         testImplementation("io.micronaut.test:micronaut-test-kotlintest")
         testImplementation("io.mockk:mockk:1.9.3")
         testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
-    }
-
-
-    kapt {
-        arguments {
-            arg("micronaut.processing.incremental", true)
-            arg("micronaut.processing.annotations", "com.iamninad.*")
-            arg("micronaut.processing.group", "com.iamninad")
-            arg("micronaut.processing.module", "micronaut-aws")
-        }
     }
 
     tasks.withType(JavaCompile) {

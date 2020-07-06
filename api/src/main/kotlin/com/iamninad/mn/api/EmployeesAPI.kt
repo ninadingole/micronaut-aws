@@ -4,12 +4,14 @@ import com.iamninad.mn.model.Employee
 import com.iamninad.mn.service.EmployeesService
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.*
+import io.micronaut.tracing.annotation.NewSpan
+import io.micronaut.tracing.annotation.SpanTag
 import org.slf4j.LoggerFactory
 import java.util.stream.Stream
 import javax.inject.Inject
 
 @Controller("/employees")
-class EmployeesAPI {
+open class EmployeesAPI {
 
     private val LOG = LoggerFactory.getLogger(EmployeesAPI::class.java)
 
@@ -17,13 +19,15 @@ class EmployeesAPI {
     lateinit var service: EmployeesService
 
     @Get
-    fun list(): Stream<Employee> {
+    @NewSpan
+    open fun list(): Stream<Employee> {
         LOG.info("employee list")
         return service.list()
     }
 
     @Post
-    fun add(@Body employee: Employee): Employee {
+    @NewSpan
+    open fun add(@SpanTag("post.employee") @Body employee: Employee): Employee {
         LOG.info("employee add")
         return service.add(employee)
     }

@@ -8,6 +8,7 @@ object App {
     fun main(args: Array<String>) {
         LoggerFactory.getLogger(App.javaClass).info("Starting app...")
         Micronaut.build()
+                .args(*args)
                 .packages("com.iamninad")
                 .mainClass(App.javaClass)
                 .start()
