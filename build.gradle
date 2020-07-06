@@ -44,6 +44,7 @@ allprojects {
             arg("micronaut.processing.annotations", "com.iamninad.*")
             arg("micronaut.processing.group", "com.iamninad")
             arg("micronaut.processing.module", "micronaut-aws")
+            arg("micronaut.openapi.views.spec", "redoc.enabled=true,rapidoc.enabled=true,swagger-ui.enabled=true,swagger-ui.theme=flattop")
         }
     }
 
@@ -71,6 +72,7 @@ allprojects {
         kapt(platform("io.micronaut:micronaut-bom:$micronautVersion"))
         kapt("io.micronaut:micronaut-inject-java")
         kapt("io.micronaut:micronaut-validation")
+        kapt("io.micronaut.configuration:micronaut-openapi")
         implementation(platform("io.micronaut:micronaut-bom:$micronautVersion"))
         implementation("io.micronaut:micronaut-inject")
         implementation("io.micronaut:micronaut-validation")
@@ -82,6 +84,7 @@ allprojects {
         implementation("io.micronaut:micronaut-http-server-netty")
         implementation("io.micronaut:micronaut-http-client")
         implementation("io.micronaut:micronaut-tracing")
+        implementation("io.swagger.core.v3:swagger-annotations")
         implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator")
         implementation("org.apache.logging.log4j:log4j-core:2.12.1")
         runtimeOnly("org.apache.logging.log4j:log4j-api:2.12.1")
