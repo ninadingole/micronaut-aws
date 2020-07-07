@@ -2,6 +2,7 @@ package com.iamninad.mn.api
 
 import com.iamninad.mn.model.Employee
 import com.iamninad.mn.service.EmployeesService
+import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.*
 import io.micronaut.tracing.annotation.NewSpan
@@ -27,17 +28,19 @@ open class EmployeesAPI {
 
     @Post
     @NewSpan
-    open fun add(@SpanTag("post.employee") @Body employee: Employee): Employee {
+    open fun add(@SpanTag("post.employee") @Body employee: Employee): HttpResponse<Employee> {
         LOG.info("employee add")
         return service.add(employee)
+                .takeIf { !it.id.isNullOrEmpty() }
+                .let { HttpResponse.created(it!!) }
     }
 
     @Delete("/{id}")
-    fun delete(id: String): HttpStatus {
+    fun delete(id: String): HttpResponse<Void> {
         LOG.info("employee delete")
         return when (service.delete(id)) {
-            true -> HttpStatus.GONE
-            else -> HttpStatus.NOT_FOUND
+            true -> HttpResponse.status(HttpStatus.GONE)
+            else -> HttpResponse.status(HttpStatus.NOT_FOUND)
         }
     }
 

@@ -30,5 +30,4 @@ open class InMemoryEmployeeRepository : EmployeeRepository {
     override fun delete(id: String): Employee? {
         return  employees.remove(id)
     }
-
 }
