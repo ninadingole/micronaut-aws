@@ -29,12 +29,12 @@ class EmployeesServiceImplTest : StringSpec({
     }
 
     "delete" {
-        every { mockRepository.delete(any()) } returns createEmployee()
+        every { mockRepository.delete(any()) } returns true
 
-        service.delete("1")
+        service.delete(1)
 
         verify(timeout = 3000) {
-            mockRepository.delete("1")
+            mockRepository.delete(1)
         }
     }
 
@@ -51,5 +51,5 @@ class EmployeesServiceImplTest : StringSpec({
 
 })
 
-private fun createEmployee() = Employee("1", "Test", "", "",
-        "", "", "Pune", arrayOf("Java"))
+private fun createEmployee() = Employee(1, "Test", "", "",
+        "", "", "Pune")

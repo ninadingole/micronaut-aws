@@ -1,0 +1,16 @@
+group 'micronaut.aws'
+version '0.1'
+
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+    runtime("io.micronaut.sql:micronaut-jdbc-hikari")
+    runtimeOnly("org.postgresql:postgresql")
+
+    testImplementation(platform("org.testcontainers:testcontainers-bom:1.14.3"))
+    testRuntimeOnly("org.testcontainers:postgresql")
+
+    compile project(path: ":core")
+}

@@ -44,7 +44,7 @@ class EmployeesAPITest(private val service: EmployeesService,
         val request = DELETE<HttpStatus>("/employees/1")
         try {
             client.toBlocking().exchange(request, Argument.VOID)
-        }catch (e: HttpClientResponseException) {
+        } catch (e: HttpClientResponseException) {
             e.status shouldBe HttpStatus.GONE
         }
     }
@@ -55,7 +55,7 @@ class EmployeesAPITest(private val service: EmployeesService,
         val request = DELETE<HttpStatus>("/employees/1")
         try {
             client.toBlocking().exchange(request, Argument.VOID)
-        }catch (e: HttpClientResponseException) {
+        } catch (e: HttpClientResponseException) {
             e.status shouldBe HttpStatus.NOT_FOUND
         }
     }
@@ -65,10 +65,9 @@ class EmployeesAPITest(private val service: EmployeesService,
     fun employeeService(): EmployeesService = mockk()
 }
 
-fun createEmployee(): Employee = Employee("1", "Test",
+fun createEmployee(): Employee = Employee(1, "Test",
         "abc@gmail.com",
         "9100000000",
         "Banking",
         "Sample Address",
-        "Pune",
-        arrayOf("Java", "Kotlin"))
+        "Pune")

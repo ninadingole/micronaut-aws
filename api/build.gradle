@@ -30,6 +30,7 @@ dependencies {
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     compile project(path: ":core")
+    compile project(path: ":data")
 
 }
 

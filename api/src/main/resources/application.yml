@@ -15,6 +15,21 @@ micronaut:
       rapidoc:
         paths: classpath:META-INF/swagger/views/rapidoc
         mapping: /rapidoc/**
+---
+datasources:
+  default:
+    url: jdbc:postgresql://0.0.0.0:5432/postgres
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: 'mysecretpassword'
+    schema-generate: CREATE_DROP
+    dialect: POSTGRES
+
+jpa:
+  default:
+    entity-scan: 'com.iamninad.mn.model'
+#    properties.hibernate.hbm2ddl.auto: update
+
 tracing:
   zipkin:
     enabled: true

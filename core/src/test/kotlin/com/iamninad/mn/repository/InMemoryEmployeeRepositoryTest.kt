@@ -19,11 +19,11 @@ class InMemoryEmployeeRepositoryTest : StringSpec({
     "delete" {
         val testEmployee = createEmployee()
         repository.add(testEmployee)
-        repository.delete("1")
+        repository.delete(1)
         val allEmployees = repository.getAll()
         allEmployees.size shouldBe 0
     }
 })
 
-private fun createEmployee() = Employee("1", "Test", "adb@sample.com", "9100000000",
-        "Sales", "Wagholi", "Pune", arrayOf("Kotlin", "Java"))
+private fun createEmployee() = Employee(1, "Test", "adb@sample.com", "9100000000",
+        "Sales", "Wagholi", "Pune")

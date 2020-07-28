@@ -31,12 +31,14 @@ open class EmployeesAPI {
     open fun add(@SpanTag("post.employee") @Body employee: Employee): HttpResponse<Employee> {
         LOG.info("employee add")
         return service.add(employee)
-                .takeIf { !it.id.isNullOrEmpty() }
-                .let { HttpResponse.created(it!!) }
+                .takeIf { it.id != 0L }
+                .let { HttpResponse.created(it!!)
+                        .header("Location", "/employees/${it.id}")
+                }
     }
 
     @Delete("/{id}")
-    fun delete(id: String): HttpResponse<Void> {
+    fun delete(id: Long): HttpResponse<Void> {
         LOG.info("employee delete")
         return when (service.delete(id)) {
             true -> HttpResponse.status(HttpStatus.GONE)

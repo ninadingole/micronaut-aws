@@ -2,3 +2,5 @@ rootProject.name = "micronaut-aws"
 include 'core'
 include 'api'
 include 'migration'
+include 'data'
+
