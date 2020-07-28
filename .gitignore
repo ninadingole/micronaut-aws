@@ -14,3 +14,4 @@ out/
 .serverless
 bin
 dist
+node_modules
