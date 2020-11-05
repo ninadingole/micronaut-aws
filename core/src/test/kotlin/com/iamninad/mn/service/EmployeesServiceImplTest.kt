@@ -4,6 +4,7 @@ import com.iamninad.mn.model.Employee
 import com.iamninad.mn.repository.EmployeeRepository
 import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.maps.shouldContain
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.mockk.clearAllMocks
@@ -24,6 +25,8 @@ class EmployeesServiceImplTest : StringSpec({
         every { mockRepository.getAll() } returns Arrays.asList(createEmployee())
 
         val actual = service.list()
+        mapOf(1 to "a", 2 to "b").shouldContain(3, "c")
+
         actual.count() shouldBe 1
         verify { mockRepository.getAll() }
     }

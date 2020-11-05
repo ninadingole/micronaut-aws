@@ -52,6 +52,9 @@ provider:
 package:
   artifact: dist/micronaut-aws.jar
 
+plugins:
+  - serverless-offline
+
 functions:
   micronaut-aws:
     handler: com.iamninad.mn.StreamLambdaHandler
